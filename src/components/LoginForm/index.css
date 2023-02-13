@@ -98,10 +98,23 @@
   outline: none;
 }
 
-.password-input-field {
-  font-size: 14px;
+.passwordIcon {
+  color: #64748b;
+}
+
+.password-input-card {
   height: 40px;
   border: 1px solid #d7dfe9;
+  background-color: #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+.password-input-field {
+  font-size: 14px;
+  width: 100%;
+  border-style: none;
   background-color: #e2e8f0;
   color: #64748b;
   border-radius: 2px;

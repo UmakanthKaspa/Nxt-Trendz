@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
-
+import {BiShow, BiHide} from 'react-icons/bi'
 import './index.css'
 
 class LoginForm extends Component {
@@ -10,7 +10,12 @@ class LoginForm extends Component {
     password: '',
     showSubmitError: false,
     errorMsg: '',
+    TogglePasswordIcon: true,
   }
+
+  onClickShow = () => this.setState({TogglePasswordIcon: false})
+
+  onClickHide = () => this.setState({TogglePasswordIcon: true})
 
   onChangeUsername = event => {
     this.setState({username: event.target.value})
@@ -52,21 +57,29 @@ class LoginForm extends Component {
   }
 
   renderPasswordField = () => {
-    const {password} = this.state
+    const {password, TogglePasswordIcon} = this.state
 
+    const PasswordIcon = TogglePasswordIcon ? (
+      <BiShow className="passwordIcon" onClick={this.onClickShow} />
+    ) : (
+      <BiHide className="passwordIcon" onClick={this.onClickHide} />
+    )
     return (
       <>
         <label className="input-label" htmlFor="password">
           PASSWORD
         </label>
-        <input
-          type="password"
-          id="password"
-          className="password-input-field"
-          value={password}
-          onChange={this.onChangePassword}
-          placeholder="Password"
-        />
+        <div className="password-input-card">
+          <input
+            className="password-input-field"
+            type={TogglePasswordIcon ? 'password' : 'text'}
+            id="password"
+            value={password}
+            onChange={this.onChangePassword}
+            placeholder="Password"
+          />
+          {password.length > 0 && PasswordIcon}
+        </div>
       </>
     )
   }
